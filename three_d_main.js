@@ -3,7 +3,7 @@ import { TTFLoader } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/TTFLo
 import { OrbitControls } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/OrbitControls.min.js";
 import { FlakesTexture } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/FlakesTexture.min.js";
 import { RGBELoader } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/RGBELoader.min.js";
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
 
 jQuery("#three-d-prv").click(function () {
   console.log("button clicked");
