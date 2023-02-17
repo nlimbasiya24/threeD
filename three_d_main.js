@@ -5,7 +5,25 @@ import { FlakesTexture } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/F
 import { RGBELoader } from "https://cdn.jsdelivr.net/gh/nlimbasiya24/threeD/RGBELoader.min.js";
 
 
-jQuery("#three-d-prv").click(function () {
+function loadScript(url) {
+    return new Promise(function(resolve, reject) {
+        var script = document.createElement("script");
+        script.onload = resolve;
+        script.onerror = reject;
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    });
+}
+function loadjQuery() {
+    if (window.jQuery) {
+        return Promise.resolve();
+    } else {
+        return loadScript('https://code.jquery.com/jquery-3.2.1.min.js');
+    }
+}
+
+loadjQuery().then(function() {
+  jQuery("#three-d-prv").click(function () {
   console.log("button clicked");
   jQuery("#prs-colors").html(three_d_swatches);
 
@@ -37,9 +55,7 @@ jQuery("#three-d-prv").click(function () {
     });
   }
 });
-
 let scene, camera, renderer, controls, pointlight;
-
 let container, fontURL;
 let cameraTarget;
 let group,
@@ -155,7 +171,7 @@ function init() {
   let envmaploader = new THREE.PMREMGenerator(renderer);
 
   new RGBELoader().load(
-    three_d_settings.images.reflectiveImage.current.fileUrl,
+    three_d_settings?.images?.reflectiveImage?.current?.fileUrl,
     function (hdrmap) {
       envmap = envmaploader.fromCubemap(hdrmap);
       texture = new THREE.CanvasTexture(new FlakesTexture());
@@ -365,3 +381,7 @@ function onPointerUp() {
   document.removeEventListener("pointermove", onPointerMove);
   document.removeEventListener("pointerup", onPointerUp);
 }
+}, function() {
+    console.log("error in jquery")
+});
+
